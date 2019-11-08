@@ -16,7 +16,11 @@ class TaskFinder
 	private $teamId;
 
 	/* @var array $params */
-	private $params = [];
+	private $params = [
+		'statuses[]' => "closed",
+		'statuses[]' => "open",
+		'statuses[]' => "custom",
+	];
 
 	/**
 	 * @param Client $client
