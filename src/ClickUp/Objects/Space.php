@@ -78,7 +78,7 @@ class Space extends AbstractObject
 		if (is_null($this->projects)) {
 			$this->projects = new ProjectCollection(
 				$this,
-				$this->client()->get("space/{$this->id()}/project")['projects']
+				$this->client()->get("space/{$this->id()}/folders")['folders']
 			);
 		}
 		return $this->projects;
