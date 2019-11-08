@@ -14,7 +14,7 @@ class Client
 	public function __construct($apiToken)
 	{
 		$this->guzzleClient = new \GuzzleHttp\Client([
-			'base_uri' => 'https://api.clickup.com/api/v1/',
+			'base_uri' => 'https://api.clickup.com/api/v2/',
 			'headers' => [
 				'Authorization' => $apiToken,
 			]
@@ -98,5 +98,15 @@ class Client
 	public function put($method, $body = [])
 	{
 		return \GuzzleHttp\json_decode($this->guzzleClient->request('PUT', $method, ['json' => $body])->getBody(), true);
+	}
+
+	/**
+	 * @param string $method
+	 * @param array $body
+	 * @return mixed
+	 */
+	public function delete($method, $body = [])
+	{
+		return \GuzzleHttp\json_decode($this->guzzleClient->request('DELETE', $method, ['json' => $body])->getBody(), true);
 	}
 }
