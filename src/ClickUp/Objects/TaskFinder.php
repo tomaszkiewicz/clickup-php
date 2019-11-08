@@ -17,9 +17,6 @@ class TaskFinder
 
 	/* @var array $params */
 	private $params = [
-		'statuses[]' => "closed",
-		'statuses[]' => "open",
-		'statuses[]' => "custom",
 	];
 
 	/**
