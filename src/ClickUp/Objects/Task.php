@@ -275,7 +275,7 @@ class Task extends AbstractObject
 			$this->comments = new CommentCollection(
 				$this,
 				$this->client()->get("task/{$this->id}/comment")['comments']
-			)
+			);
 		}
 		return $this->team;
 	}
