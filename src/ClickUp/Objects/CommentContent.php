@@ -2,7 +2,7 @@
 
 namespace ClickUp\Objects;
 
-class Task extends AbstractObject
+class CommentContent extends AbstractObject
 {
 	/* @var string $text */
 	private $text;

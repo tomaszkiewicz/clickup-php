@@ -2,7 +2,7 @@
 
 namespace ClickUp\Objects;
 
-class Task extends AbstractObject
+class Comment extends AbstractObject
 {
 	/* @var string $id */
 	private $id;
