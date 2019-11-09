@@ -277,7 +277,7 @@ class Task extends AbstractObject
 				$this->client()->get("task/{$this->id}/comment")['comments']
 			);
 		}
-		return $this->team;
+		return $this->comments;
 	}
 
 	/**
