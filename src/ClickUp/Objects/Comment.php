@@ -82,7 +82,7 @@ class Comment extends AbstractObject
 		$this->comment = $array['comment'];
 		$this->comment_text = $array['comment_text'];
 		$this->user = new User(
-			$this->client,
+			$this->client(),
 			$array['user']
 		);
 		$this->date = $this->getDate($array, $array['date']);
