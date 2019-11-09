@@ -273,7 +273,7 @@ class Task extends AbstractObject
 	{
 		if (is_null($this->team)) {
 			$this->comments = new CommentCollection(
-				$this,
+				$this->client(),
 				$this->client()->get("task/{$this->id}/comment")['comments']
 			);
 		}

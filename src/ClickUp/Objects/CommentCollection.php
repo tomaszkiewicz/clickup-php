@@ -12,12 +12,9 @@ use ClickUp\Client;
  */
 class CommentCollection extends AbstractObjectCollection
 {
-	public function __construct(Client $client, $array, $teamId)
+	public function __construct(Client $client, $array)
 	{
 		parent::__construct($client, $array);
-		foreach ($this as $comment) {
-			$comment->setTeamId($teamId);
-		}
 	}
 
 	/**

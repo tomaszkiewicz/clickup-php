@@ -7,7 +7,7 @@ class Comment extends AbstractObject
 	/* @var string $id */
 	private $id;
 	
-	/* @var CommentContentCollection|null $comment */
+	/* @var array $comment */
 	private $comment;
 	
 	/* @var string $comment_text */
@@ -28,7 +28,7 @@ class Comment extends AbstractObject
 	}
 
 	/**
-	 * @return CommentContentCollection|null
+	 * @return array
 	 */
 	public function comment()
 	{
@@ -79,10 +79,7 @@ class Comment extends AbstractObject
 	protected function fromArray($array)
 	{
 		$this->id = $array['id'];
-		$this->comment = new CommentContentCollection(
-			$this->client,
-			$array['comment']
-		);
+		$this->comment = $array['comment'];
 		$this->comment_text = $array['comment_text'];
 		$this->user = new User(
 			$this->client,
