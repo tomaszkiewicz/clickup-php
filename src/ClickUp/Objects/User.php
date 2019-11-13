@@ -72,4 +72,11 @@ class User extends AbstractObject
 		$this->profilePicture = $array['profilePicture'];
 		$this->initials = isset($array['initials']) ? $array['initials'] : null;
 	}
+
+    public function jsonSerialize()
+    {
+    	parent::jsonSerialize();
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }

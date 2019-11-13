@@ -99,4 +99,11 @@ class TaskList extends AbstractObject
 		$this->id = $array['id'];
 		$this->name = $array['name'];
 	}
+
+    public function jsonSerialize()
+    {
+    	parent::jsonSerialize();
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }

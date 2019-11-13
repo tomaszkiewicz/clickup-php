@@ -24,4 +24,14 @@ class CommentCollection extends AbstractObjectCollection
 	{
 		return Comment::class;
 	}
+
+	/**
+	 * @return boolean
+	 */
+	public function hasType($type)
+	{
+		foreach($this->objects() as $object) {
+			
+		}
+	}
 }

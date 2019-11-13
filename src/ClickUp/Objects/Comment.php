@@ -28,11 +28,11 @@ class Comment extends AbstractObject
 	}
 
 	/**
-	 * @return array
+	 * @return object
 	 */
 	public function comment()
 	{
-		return $this->comment;
+		return (object) $this->comment;
 	}
 
 	/**
@@ -40,8 +40,27 @@ class Comment extends AbstractObject
 	 */
 	public function comment_text()
 	{
-		return $this->comment_text;
-	}
+		return str_replace("\n", '', $this->comment_text);
+    }
+
+    /**
+     * @return string
+     */
+    public function type()
+    {
+        if(filter_var($this->comment_text(), FILTER_VALIDATE_URL)){
+            return 'url';
+        }
+        return 'text';
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isType($type)
+    {
+        return $this->type() === $type;
+    }
 
 	/**
 	 * @return TeamMember
@@ -102,4 +121,11 @@ class Comment extends AbstractObject
 		$unixTime = substr($array[$key], 0, 10);
 		return new \DateTimeImmutable("@$unixTime");
 	}
+
+    public function jsonSerialize()
+    {
+    	parent::jsonSerialize();
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }

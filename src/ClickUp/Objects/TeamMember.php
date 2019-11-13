@@ -44,4 +44,11 @@ class TeamMember extends User
 	{
 		$this->team = $team;
 	}
+
+    public function jsonSerialize()
+    {
+    	parent::jsonSerialize();
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }

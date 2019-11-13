@@ -153,4 +153,11 @@ class Space extends AbstractObject
 			'dependency_warning' => isset($array['features']['dependency_warning']['enabled']) ? $array['features']['dependency_warning']['enabled'] : false,
 		];
 	}
+
+    public function jsonSerialize()
+    {
+    	parent::jsonSerialize();
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }

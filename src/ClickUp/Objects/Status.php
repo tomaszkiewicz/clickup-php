@@ -58,4 +58,11 @@ class Status extends AbstractObject
 		$this->color = $array['color'];
 		$this->type = $array['type'];
 	}
+
+    public function jsonSerialize()
+    {
+    	parent::jsonSerialize();
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }

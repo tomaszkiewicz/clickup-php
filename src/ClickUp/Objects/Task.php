@@ -271,7 +271,7 @@ class Task extends AbstractObject
 	 */
 	public function comments()
 	{
-		if (is_null($this->team)) {
+		if (is_null($this->comments)) {
 			$this->comments = new CommentCollection(
 				$this->client(),
 				$this->client()->get("task/{$this->id}/comment")['comments']
@@ -346,4 +346,11 @@ class Task extends AbstractObject
 		$unixTime = substr($array[$key], 0, 10);
 		return new \DateTimeImmutable("@$unixTime");
 	}
+
+    public function jsonSerialize()
+    {
+    	parent::jsonSerialize();
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }
