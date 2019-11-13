@@ -353,4 +353,14 @@ class Task extends AbstractObject
         $vars = get_object_vars($this);
         return $vars;
     }
+
+    public function toJson()
+    {
+        return json_encode($this);
+    }
+
+    public function toArray()
+    {
+        return (array) json_decode($this->toJson());
+    }
 }
