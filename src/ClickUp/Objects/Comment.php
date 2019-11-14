@@ -18,6 +18,15 @@ class Comment extends AbstractObject
 	
 	/* @var string $date */
 	private $date;
+	
+	/* @var string $type */
+	private $type;
+
+	public function __construct()
+	{
+		parent::construct();
+		$this->type = $this->type();
+	}
 
 	/**
 	 * @return int
@@ -52,14 +61,6 @@ class Comment extends AbstractObject
             return 'url';
         }
         return 'text';
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isType($type)
-    {
-        return $this->type() === $type;
     }
 
 	/**
