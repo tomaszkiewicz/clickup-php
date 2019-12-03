@@ -105,7 +105,7 @@ class Task extends AbstractObject
 
 	public function description()
 	{
-		return $this->description;
+		return str_replace("\n", '', $this->comment_text);
 	}
 
 	public function status()
@@ -361,6 +361,8 @@ class Task extends AbstractObject
 
     public function toArray()
     {
-        return (array) json_decode($this->toJson());
+        $result = (array) json_decode($this->toJson());
+        $result['comments'] = (array) json_decode(json_encode($this->comments()->objects()));
+        return $result;
     }
 }

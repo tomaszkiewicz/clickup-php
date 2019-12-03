@@ -57,10 +57,22 @@ class Comment extends AbstractObject
      */
     public function type()
     {
-        if(filter_var($this->comment_text(), FILTER_VALIDATE_URL)){
-            return 'url';
+        foreach ($this->comment() as $comment) {
+            if (isset($comment['type'])) {
+                $temp = $comment['type'];
+                break;
+            } elseif (isset($comment['attributes']['link'])) {
+                $temp = 'url';
+                break;
+            } else {
+                $temp = null;
+            }
         }
-        return 'text';
+        $this->type = $temp;
+        if (is_null($this->type)) {
+            $this->type = 'text';
+        }
+        return $this->type;
     }
 
 	/**
@@ -106,6 +118,7 @@ class Comment extends AbstractObject
 			$array['user']
 		);
 		$this->date = $this->getDate($array, $array['date']);
+		$this->type = $this->type();
 	}
 
 	/**
