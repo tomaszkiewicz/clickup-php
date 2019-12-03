@@ -22,12 +22,6 @@ class Comment extends AbstractObject
 	/* @var string $type */
 	private $type;
 
-	public function __construct()
-	{
-		parent::construct();
-		$this->type = $this->type();
-	}
-
 	/**
 	 * @return int
 	 */
