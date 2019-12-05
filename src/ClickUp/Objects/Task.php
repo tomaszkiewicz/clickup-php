@@ -108,7 +108,7 @@ class Task extends AbstractObject
 
 	public function description()
 	{
-		return str_replace("\n", '', $this->comment_text);
+		return str_replace("\n", '', $this->description);
 	}
 
 	public function status()
