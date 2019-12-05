@@ -27,6 +27,9 @@ class Task extends AbstractObject
 	/* @var \DateTimeImmutable $dateUpdated */
 	private $dateUpdated;
 
+	/* @var \DateTimeImmutable $dateClosed */
+	private $dateClosed;
+
 	/* @var TeamMember $creator */
 	private $creator;
 
@@ -126,6 +129,11 @@ class Task extends AbstractObject
 	public function dateUpdated()
 	{
 		return $this->dateUpdated;
+	}
+
+	public function dateClosed()
+	{
+		return $this->dateClosed;
 	}
 
 	public function creator()
@@ -309,6 +317,7 @@ class Task extends AbstractObject
 		$this->orderindex = $array['orderindex'];
 		$this->dateCreated = $this->getDate($array, 'date_created');
 		$this->dateUpdated = $this->getDate($array, 'date_updated');
+		$this->dateClosed = $this->getDate($array, 'date_closed');
 		$this->creator = new User(
 			$this->client(),
 			$array['creator']
