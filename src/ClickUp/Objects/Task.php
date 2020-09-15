@@ -27,6 +27,9 @@ class Task extends AbstractObject
 	/* @var \DateTimeImmutable $dateUpdated */
 	private $dateUpdated;
 
+	/* @var \DateTimeImmutable $dateClosed */
+	private $dateClosed;
+
 	/* @var TeamMember $creator */
 	private $creator;
 
@@ -84,8 +87,11 @@ class Task extends AbstractObject
 	/* @var string $url */
 	private $url;
 
+	/* @var CommentCollection|null $comments */
+	private $comments = null;
+
 	/**
-	 * @return int
+	 * @return string
 	 */
 	public function id()
 	{
@@ -102,7 +108,7 @@ class Task extends AbstractObject
 
 	public function description()
 	{
-		return $this->description;
+		return str_replace("\n", '', $this->description);
 	}
 
 	public function status()
@@ -123,6 +129,11 @@ class Task extends AbstractObject
 	public function dateUpdated()
 	{
 		return $this->dateUpdated;
+	}
+
+	public function dateClosed()
+	{
+		return $this->dateClosed;
 	}
 
 	public function creator()
@@ -264,6 +275,20 @@ class Task extends AbstractObject
 	}
 
 	/**
+	 * @return CommentCollection
+	 */
+	public function comments()
+	{
+		if (is_null($this->comments)) {
+			$this->comments = new CommentCollection(
+				$this->client(),
+				$this->client()->get("task/{$this->id}/comment")['comments']
+			);
+		}
+		return $this->comments;
+	}
+
+	/**
 	 * @see https://jsapi.apiary.io/apis/clickup/reference/0/task/edit-task.html
 	 * @param array $body
 	 * @return array
@@ -292,6 +317,7 @@ class Task extends AbstractObject
 		$this->orderindex = $array['orderindex'];
 		$this->dateCreated = $this->getDate($array, 'date_created');
 		$this->dateUpdated = $this->getDate($array, 'date_updated');
+		$this->dateClosed = $this->getDate($array, 'date_closed');
 		$this->creator = new User(
 			$this->client(),
 			$array['creator']
@@ -329,4 +355,23 @@ class Task extends AbstractObject
 		$unixTime = substr($array[$key], 0, 10);
 		return new \DateTimeImmutable("@$unixTime");
 	}
+
+    public function jsonSerialize()
+    {
+    	parent::jsonSerialize();
+        $vars = get_object_vars($this);
+        return $vars;
+    }
+
+    public function toJson()
+    {
+        return json_encode($this);
+    }
+
+    public function toArray()
+    {
+        $result = (array) json_decode($this->toJson());
+        $result['comments'] = (array) json_decode(json_encode($this->comments()->objects()));
+        return $result;
+    }
 }

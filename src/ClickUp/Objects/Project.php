@@ -160,4 +160,21 @@ class Project extends AbstractObject
 			);
 		}
 	}
+
+    public function jsonSerialize()
+    {
+    	parent::jsonSerialize();
+        $vars = get_object_vars($this);
+        return $vars;
+    }
+
+    public function toJson()
+    {
+        return json_encode($this);
+    }
+
+    public function toArray()
+    {
+        return (array) json_decode($this->toJson());
+    }
 }

@@ -3,8 +3,9 @@
 namespace ClickUp\Objects;
 
 use ClickUp\Client;
+use JsonSerializable;
 
-abstract class AbstractObject
+abstract class AbstractObject implements JsonSerializable
 {
     /* @var Client $client */
 	private $client;
@@ -47,4 +48,10 @@ abstract class AbstractObject
 	{
 		return $this->extra;
 	}
+
+    public function jsonSerialize()
+    {
+        $vars = get_object_vars($this);
+        return $vars;
+    }
 }

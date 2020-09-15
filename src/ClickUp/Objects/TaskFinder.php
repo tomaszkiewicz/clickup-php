@@ -16,7 +16,8 @@ class TaskFinder
 	private $teamId;
 
 	/* @var array $params */
-	private $params = [];
+	private $params = [
+	];
 
 	/**
 	 * @param Client $client
